@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Jaannn — Your First Day Sanctuary 🌿</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Sacramento&family=Quicksand:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --terracotta: #c97b63;
+            --terracotta-light: #f5e0d8;
+            --sage: #a8b5a0;
+            --sage-light: #e8ede5;
+            --cream: #faf8f5;
+            --warm-white: #fff9f5;
+            --text: #4a3f3a;
+            --text-light: #8a7a72;
+            --gold: #d4a574;
+            --blush: #e8d5d0;
+            --peach: #f5e6dc;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Floating petals */
+        .petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 20px;
+            animation: fall linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(100vh) rotate(360deg) translateX(50px); opacity: 0; }
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(160deg, var(--terracotta-light) 0%, var(--peach) 40%, var(--sage-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201,123,99,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -150px;
+            animation: breathe 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168,181,160,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            animation: breathe 7s ease-in-out infinite reverse;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .cycle-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--terracotta), var(--gold));
+            color: white;
+            padding: 0.7rem 2.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            animation: fadeInDown 1.2s ease-out;
+            box-shadow: 0 10px 30px rgba(201,123,99,0.3);
+        }
+
+        .hero-title {
+            font-family: 'Sacramento', cursive;
+            font-size: 5.5rem;
+            color: var(--terracotta);
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.7rem;
+            color: var(--sage);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+        }
+
+        .hero-message {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            max-width: 580px;
+            margin: 0 auto 2rem;
+            line-height: 2;
+            animation: fadeInUp 1.5s ease-out 0.9s both;
+        }
+
+        .hero-heart {
+            font-size: 4rem;
+            animation: heartbeat 1.8s ease-in-out infinite;
+            display: inline-block;
+            margin: 1rem 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.08); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.12); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float 2s ease-in-out infinite;
+            color: var(--terracotta);
+            font-size: 1.8rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-12px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            text-align: center;
+            color: var(--terracotta);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '❀';
+            display: block;
+            font-size: 1.3rem;
+            color: var(--gold);
+            margin-top: 0.5rem;
+        }
+
+        /* Love Letter */
+        .letter-section {
+            background: linear-gradient(135deg, var(--terracotta-light) 0%, var(--peach) 100%);
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 3rem auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(201,123,99,0.15);
+        }
+
+        .letter-section::before {
+            content: '💌';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .letter-section h2 {
+            font-family: 'Sacramento', cursive;
+            font-size: 3.2rem;
+            text-align: center;
+            color: var(--terracotta);
+            margin-bottom: 2rem;
+            margin-top: 1rem;
+        }
+
+        .letter-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            line-height: 2.2;
+            color: var(--text);
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .letter-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .letter-signature {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.2rem;
+            color: var(--gold);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* First Day Care */
+        .care-section {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 3rem auto;
+            box-shadow: 0 20px 60px rgba(201,123,99,0.12);
+        }
+
+        .care-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .care-card {
+            background: linear-gradient(135deg, var(--sage-light) 0%, var(--terracotta-light) 100%);
+            border-radius: 25px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .care-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--terracotta), var(--gold));
+        }
+
+        .care-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(201,123,99,0.2);
+        }
+
+        .care-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .care-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--terracotta);
+            margin-bottom: 0.8rem;
+        }
+
+        .care-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Pamper Me Button Section */
+        .pamper-section {
+            background: linear-gradient(135deg, var(--sage-light) 0%, var(--cream) 50%, var(--peach) 100%);
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 3rem auto;
+            text-align: center;
+        }
+
+        .pamper-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--terracotta);
+            margin-bottom: 1rem;
+        }
+
+        .pamper-btn {
+            background: linear-gradient(135deg, var(--terracotta), var(--gold));
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 1rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(201,123,99,0.3);
+        }
+
+        .pamper-btn:hover {
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201,123,99,0.4);
+        }
+
+        .pamper-message {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--terracotta);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            transition: all 0.5s ease;
+            transform: translateY(10px);
+        }
+
+        .pamper-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Affirmations */
+        .affirm-section {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .affirm-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .affirm-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 300px;
+            box-shadow: 0 10px 30px rgba(201,123,99,0.1);
+            transition: all 0.4s ease;
+            border-top: 4px solid var(--terracotta);
+        }
+
+        .affirm-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(201,123,99,0.2);
+        }
+
+        .affirm-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .affirm-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15rem;
+            color: var(--text);
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* Checklist */
+        .checklist-section {
+            background: white;
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 3rem auto;
+            box-shadow: 0 20px 60px rgba(201,123,99,0.12);
+        }
+
+        .checklist {
+            list-style: none;
+            margin-top: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--terracotta-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .checklist li:hover {
+            padding-left: 10px;
+            color: var(--terracotta);
+        }
+
+        .checklist li.checked {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+
+        .checklist li.checked .check-circle {
+            background: var(--terracotta);
+            border-color: var(--terracotta);
+        }
+
+        .check-circle {
+            width: 26px;
+            height: 26px;
+            border: 2px solid var(--terracotta);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .check-circle::after {
+            content: '✓';
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .checklist li.checked .check-circle::after {
+            opacity: 1;
+        }
+
+        /* Warm Wishes */
+        .wishes-section {
+            background: linear-gradient(135deg, var(--peach) 0%, var(--terracotta-light) 100%);
+            border-radius: 30px;
+            padding: 4rem;
+            margin: 3rem auto;
+            text-align: center;
+        }
+
+        .wish-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .wish-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 280px;
+            box-shadow: 0 10px 30px rgba(201,123,99,0.12);
+            transition: all 0.4s ease;
+        }
+
+        .wish-card:hover {
+            transform: translateY(-5px) rotate(1deg);
+            box-shadow: 0 15px 40px rgba(201,123,99,0.2);
+        }
+
+        .wish-card .emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .wish-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--terracotta) 0%, var(--gold) 100%);
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer h2 {
+            font-family: 'Sacramento', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.9;
+        }
+
+        .footer .big-heart {
+            font-size: 5rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .footer .closing {
+            font-family: 'Sacramento', cursive;
+            font-size: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .footer .tiny {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 3.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 1.8rem; }
+            .letter-section, .care-section, .pamper-section, .checklist-section, .wishes-section { padding: 2rem; }
+        }
+
+        html { scroll-behavior: smooth; }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--cream); }
+        ::-webkit-scrollbar-thumb { background: var(--terracotta); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Floating Petals -->
+    <div class="petals" id="petals"></div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="cycle-badge">New Cycle — Day 1</div>
+            <div class="hero-heart">🤎</div>
+            <h1 class="hero-title">My Jaannn</h1>
+            <p class="hero-subtitle">Your First Day Sanctuary</p>
+            <p class="hero-message">
+                A new cycle begins, my love.<br>
+                And just like every time before — I am here.<br>
+                Not because I have to be, but because<br>
+                there is nowhere else I would rather be.<br>
+                <br>
+                Today, you rest. Today, you are pampered.<br>
+                Today, you are my only priority.
+            </p>
+            <div style="font-size: 1.3rem; color: var(--gold); margin-top: 1.5rem;">
+                🌿 You are my home, my peace, my everything
+            </div>
+        </div>
+        <div class="scroll-hint">↓</div>
+    </section>
+
+    <!-- Love Letter -->
+    <section class="letter-section">
+        <h2>A Letter for Your First Day</h2>
+        <div class="letter-text">
+            <p>
+                My dearest Jaannn,
+            </p>
+            <p>
+                I know the feeling. That first-day heaviness. The body announcing its arrival with aches 
+                and tiredness and a quiet need to slow down. I see it. I feel it with you. And I want you to know — 
+                you do not have to push through this alone.
+            </p>
+            <p>
+                On this first day, I want to be your safe harbor. The place where you don't have to explain, 
+                don't have to apologize, don't have to be anything other than exactly what you are in this moment. 
+                Tired? Rest. Cranky? Vent. Quiet? I'll sit in silence with you. Needy? I'll give you everything I have.
+            </p>
+            <p>
+                Your body is doing something powerful and natural, and I am in awe of it. 
+                The strength it takes, the rhythm it keeps, the life it sustains — all of it is magic. 
+                And on the days when that magic feels more like a burden, I want to carry the weight with you.
+            </p>
+            <p>
+                So here's my promise for today: I will not ask you to be okay. I will not rush you. 
+                I will not make you feel guilty for resting. I will simply love you — in every form, 
+                through every mood, with every breath. Because that is what you deserve. 
+                Not just today, but always.
+            </p>
+            <p>
+                Rest now, my love. I've got you. Completely.
+            </p>
+        </div>
+        <div class="letter-signature">Forever yours, your person 🤎</div>
+    </section>
+
+    <!-- First Day Care -->
+    <section class="care-section">
+        <h2 class="section-title">First Day Care Essentials</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">
+            Everything I want to do for you on this very first day
+        </p>
+        <div class="care-grid">
+            <div class="care-card">
+                <span class="care-icon">🍵</span>
+                <h3>Warm Ginger Tea</h3>
+                <p>Fresh ginger, honey, lemon — brewed just right. I'll keep your cup full and warm all day long.</p>
+            </div>
+            <div class="care-card">
+                <span class="care-icon">🛌</span>
+                <h3>Bed Rest Command</h3>
+                <p>Your bed is your throne today. I'll bring the world to you. Food, water, medicine, entertainment — everything.</p>
+            </div>
+            <div class="care-card">
+                <span class="care-icon">🌡️</span>
+                <h3>Heating Pad Ready</h3>
+                <p>Warm, soothing, positioned perfectly on your tummy or back. I'll check the temperature so it's never too hot.</p>
+            </div>
+            <div class="care-card">
+                <span class="care-icon">🍫</span>
+                <h3>Chocolate Therapy</h3>
+                <p>Dark chocolate, hot cocoa, or whatever your soul is craving. First-day cravings are sacred and must be honored.</p>
+            </div>
+            <div class="care-card">
+                <span class="care-icon">💆</span>
+                <h3>Gentle Massages</h3>
+                <p>Soft pressure on your lower back, gentle tummy rubs, scalp massages. Every touch says "I love you, I care."</p>
+            </div>
+            <div class="care-card">
+                <span class="care-icon">🎬</span>
+                <h3>Movie Marathon</h3>
+                <p>Your favorite comfort shows, wrapped in blankets, with me beside you. No responsibilities, just us and the screen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pamper Me Section -->
+    <section class="pamper-section">
+        <h2>Need a Little Extra Love?</h2>
+        <p style="color: var(--text-light); margin-bottom: 1.5rem;">
+            Click any button and I'll tell you exactly what I want to do for you right now
+        </p>
+        <div>
+            <button class="pamper-btn" onclick="showPamper('hug')">🤗 I Need a Hug</button>
+            <button class="pamper-btn" onclick="showPamper('food')">🍜 I'm Hungry</button>
+            <button class="pamper-btn" onclick="showPamper('sad')">😢 I'm Emotional</button>
+            <button class="pamper-btn" onclick="showPamper('pain')">😣 I'm in Pain</button>
+            <button class="pamper-btn" onclick="showPamper('tired')">😴 I'm Exhausted</button>
+            <button class="pamper-btn" onclick="showPamper('loved')">🥰 I Feel Loved</button>
+        </div>
+        <div class="pamper-message" id="pamperMessage"></div>
+    </section>
+
+    <!-- Affirmations -->
+    <section class="affirm-section">
+        <h2 class="section-title">First Day Affirmations</h2>
+        <p style="color: var(--text-light); margin-bottom: 2rem;">
+            Read these aloud, my love. Let them settle into your heart.
+        </p>
+        <div class="affirm-grid">
+            <div class="affirm-card">
+                <div class="affirm-icon">🌿</div>
+                <p>"I honor my body's need for rest. Slowing down is an act of self-love."</p>
+            </div>
+            <div class="affirm-card">
+                <div class="affirm-icon">🤎</div>
+                <p>"I am allowed to feel everything today — the tired, the tender, the vulnerable."</p>
+            </div>
+            <div class="affirm-card">
+                <div class="affirm-icon">✨</div>
+                <p>"My body is powerful, natural, and worthy of deep care and gentleness."</p>
+            </div>
+            <div class="affirm-card">
+                <div class="affirm-icon">🕊️</div>
+                <p>"I release all guilt about resting. I deserve this pause. I am enough as I am."</p>
+            </div>
+            <div class="affirm-card">
+                <div class="affirm-icon">💫</div>
+                <p>"I am surrounded by love that asks for nothing in return. I am safe."</p>
+            </div>
+            <div class="affirm-card">
+                <div class="affirm-icon">🌸</div>
+                <p>"This is just one day. Tomorrow will be gentler. And I am loved through all of it."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checklist -->
+    <section class="checklist-section">
+        <h2 class="section-title">Your First Day Self-Care Checklist</h2>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 2rem;">
+            Click to check off — or just let me handle everything for you 🤎
+        </p>
+        <ul class="checklist">
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Drink warm water with lemon first thing</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Take your pain medicine on time</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Eat a warm, nourishing breakfast</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Use the heating pad for 20 minutes</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Drink herbal tea — ginger or chamomile</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Take a short nap without guilt</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Eat dark chocolate (doctor's orders!)</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Stay hydrated — 8 glasses minimum</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Accept a gentle back massage from me</span>
+            </li>
+            <li onclick="toggleCheck(this)">
+                <div class="check-circle"></div>
+                <span>Let me pamper you without saying "no"</span>
+            </li>
+        </ul>
+    </section>
+
+    <!-- Warm Wishes -->
+    <section class="wishes-section">
+        <h2 class="section-title">Little Wishes for Your First Day</h2>
+        <div class="wish-cards">
+            <div class="wish-card">
+                <div class="emoji">🌙</div>
+                <p>"May your cramps be gentle and your rest be deep, my love."</p>
+            </div>
+            <div class="wish-card">
+                <div class="emoji">☕</div>
+                <p>"May every sip of tea wrap you in warmth and comfort."</p>
+            </div>
+            <div class="wish-card">
+                <div class="emoji">🌈</div>
+                <p>"May your mood stay light and your heart feel held."</p>
+            </div>
+            <div class="wish-card">
+                <div class="emoji">💫</div>
+                <p>"May you feel so loved today that pain feels a little smaller."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="big-heart">🤎</div>
+        <h2>Jaannn</h2>
+        <p>
+            Day 1 of a new cycle, but the same old love —<br>
+            deeper, stronger, and more devoted than ever.<br>
+            Rest now, my Dil Kii Taskeen.<br>
+            I'll be right here when you need me.<br>
+            <br>
+            <em>"You are my today, my tomorrow, and every day after."</em>
+        </p>
+        <div class="closing">Forever & Always</div>
+        <div class="tiny">
+            New cycle, same heart — completely yours 🤎<br>
+            Made with endless love for my everything
+        </div>
+    </footer>
+
+    <script>
+        // Floating Petals
+        const petalEmojis = ['🍂', '🌿', '🤎', '✨', '🌸', '🍃'];
+        function createPetal() {
+            const container = document.getElementById('petals');
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.innerHTML = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 6 + 8) + 's';
+            petal.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            container.appendChild(petal);
+            setTimeout(() => petal.remove(), 14000);
+        }
+
+        setInterval(createPetal, 700);
+
+        // Checklist Toggle
+        function toggleCheck(item) {
+            item.classList.toggle('checked');
+        }
+
+        // Pamper Messages
+        const pamperMessages = {
+            hug: "I'm wrapping my arms around you right now. Tight. Warm. Safe. You can stay here as long as you need. I'm not letting go. 🤗",
+            food: "Tell me what you're craving — khichdi, pasta, soup, or something sweet? I'll make it fresh, warm, and bring it to you in bed. No arguments. 🍜",
+            sad: "Come here, my love. Let me hold you. Cry if you need to. Scream if you want to. I'm your safe place — no judgment, only love. 😢💗",
+            pain: "I'm getting the heating pad, your medicine, and warm water. Then I'm lying beside you, holding your hand, breathing with you. We'll get through this together. 😣💕",
+            tired: "Sleep, my beautiful girl. Right now. I'll handle everything — the world, the chores, the noise. You just close your eyes. I've got it all. 😴🌙",
+            loved: "And you ARE loved, my Jaannn. More than the stars, deeper than the ocean, warmer than the sun. You are my entire universe. 🥰🤎"
+        };
+
+        function showPamper(type) {
+            const messageDiv = document.getElementById('pamperMessage');
+            messageDiv.classList.remove('show');
+            setTimeout(() => {
+                messageDiv.innerHTML = pamperMessages[type];
+                messageDiv.classList.add('show');
+            }, 200);
+        }
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -60px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.care-card, .affirm-card, .wish-card, .checklist li').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.7s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
